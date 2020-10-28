@@ -25,7 +25,9 @@ function bet(){
     // betAmount != msg.value
 
     contractInstance.methods.playerBet(web3.utils.toWei(betAmount)).send(config)
-
+    .on("transactionHash", function(hash){ 
+        $("#bet_output").text(hash);
+    }) 
     .on("transactionHash", function(hash){ 
         console.log(hash);
     }) 

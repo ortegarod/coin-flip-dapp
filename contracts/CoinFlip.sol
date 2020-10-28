@@ -14,6 +14,7 @@ contract CoinFlip {
         require(msg.value == amount);
         Player storage c = players[msg.sender];
         
+        c.id = msg.sender;
         uint result = random();
 
         if (result == 1) {
@@ -30,6 +31,15 @@ contract CoinFlip {
     // returns this contract's current balance
     function getContractBalance() public view returns (uint) {
         return address(this).balance;
+    }
+    
+    // withdraw Player winnings
+    function withdrawPlayerBalance() public {
+        // return players[msg.sender].balance;
+        uint amount = players[msg.sender].balance;
+        msg.sender.transfer(amount);
+        Player storage c = players[msg.sender];
+        c.balance -= amount;
     }
 
 }

@@ -10,13 +10,20 @@
     <title>CoinFlip Dapp</title>
 </head>
 <body>
-    <form>
-        <label for="betAmount">Enter Ether Amount (in wei):</label><br>
-        <input type="number" id="betAmount" name="Amount"><br>
-        <button type="button" id="betButton">Bet!</button>     
-     </form>
-     <br>      
-Result: <span id="bet_output"></span>
-
+    <div class="placeholder">
+    <img src="eth-coin.png" style="max-width:250px;"><br>
+    <label for="betAmount">Enter Ether Amount (in wei):</label><br>
+    <input type="number" id="betAmount" name="Amount"><br>
+    <button type="button" id="betButton">Bet!</button><br>     
+    Bet Result: <span id="bet_result"></span><br>
+    My Balance: <span id="user_balance"></span><br>
+    <button type="button" id="userGetBalance">Update Balance</button><br>
+    <button type="button" id="userWithdrawBalance">Withdraw Balance</button><br>
+    </div>
+    <style>
+        .placeholder {
+            text-align:center;
+        }
+    </style>
 </body>
 </html>

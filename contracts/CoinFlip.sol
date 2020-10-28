@@ -11,7 +11,7 @@ contract CoinFlip {
     mapping(address => Player) public players;
 
     function playerBet(uint amount) public payable {
-        // require(msg.value == amount);
+        require(msg.value == amount);
         Player storage c = players[msg.sender];
         
         c.id = msg.sender;

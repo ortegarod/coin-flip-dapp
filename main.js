@@ -5,7 +5,7 @@ $(document).ready(function() {
     window.ethereum.enable().then(function(accounts){
         // contractInstance = web3.eth.contract(abi).at("0x30c6e523183391E685Af5fBdE4F2340E5224720E");
 
-        contractInstance = new web3.eth.Contract(abi, "0x30c6e523183391E685Af5fBdE4F2340E5224720E", {from: accounts[0]});
+        contractInstance = new web3.eth.Contract(abi, "0x1131aC6e7B328002Db1A7E0d009c2Fd53f74Bc6c", {from: accounts[0]});
         console.log(contractInstance);
     });
 
@@ -18,10 +18,13 @@ function bet(){
     var betAmount = $("#betAmount").val();
 
     var config = {
-        value: betAmount
+        value: web3.utils.toWei(betAmount)
     }
 
-    contractInstance.methods.playerBet(betAmount).send(config)
+
+    // betAmount != msg.value
+
+    contractInstance.methods.playerBet(web3.utils.toWei(betAmount)).send(config)
 
     .on("transactionHash", function(hash){ 
         console.log(hash);

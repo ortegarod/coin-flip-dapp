@@ -5,13 +5,15 @@ $(document).ready(function() {
     window.ethereum.enable().then(function(accounts){
         // contractInstance = web3.eth.contract(abi).at("0x30c6e523183391E685Af5fBdE4F2340E5224720E");
 
-        contractInstance = new web3.eth.Contract(abi, "0xc5f34B1320FBeA37489268250b107C2B9b803218", {from: accounts[0]});
+        contractInstance = new web3.eth.Contract(abi, "0xF4e9eaF178E74f643AF6a2bDD397228B8e8b518a", {from: accounts[0]});
         console.log(contractInstance);
     });
 
     $("#betButton").click(bet)
     $("#userWithdrawBalance").click(withdraw)
     $("#userGetBalance").click(userGetBalance)
+    $("#getContractBalance").click(getContractBalance)
+    $("#withdrawContractBalance").click(withdrawContractBalance)
 
 
 });
@@ -28,41 +30,36 @@ function bet(){
     .on("transactionHash", function(hash){ 
         console.log(hash);
     }) 
-    .on("confirmation", function(confirmationNr){
-        console.log(confirmationNr); 
-    })
     .on("receipt", function(receipt){
         console.log(receipt);
         contractInstance.methods.userBalance().call()
         .then(function(result){
-            console.log(result);
-            $("#user_balance").text(result);
+            console.log("user has " + web3.utils.fromWei(result) + " ETH");
+            $("#user_balance").text(web3.utils.fromWei(result) + " ETH");
+        }) 
+
+        contractInstance.methods.getContractBalance().call()
+        .then(function(result){
+            console.log("contract has " + web3.utils.fromWei(result) + " ETH");
+            $("#contract_balance").text(web3.utils.fromWei(result) + " ETH");
         }) 
     })
 
-    // will be fired once the receipt is mined
-    .then(function(receipt){
-        console.log("test1");
-    })
-
-    // will be fired after tx
-    .then(result => console.log("test2"))
-    .then(result => console.log("test3"));
-
-    contractInstance.events.Result(function(error, event){
+    contractInstance.once('Result', {}, (function(error, event){
         console.log(event);
-        console.log(event.returnValues['result']);
-        $("#bet_result").text(event.returnValues['result']);
+        // console.log(event.returnValues['result']);
+        // $("#bet_result").text(event.returnValues['result']);
 
         if (event.returnValues['result'] == 1) {
             $("#bet_result").text("WINNER");
-        } else $("#bet_result").text("LOSER");
+            console.log("user won")
+        } else
+        $("#bet_result").text("LOSER") &&
+        console.log("user lost")
 
     })
 
-
-
-    }
+    )}
 
     
 
@@ -79,7 +76,7 @@ function withdraw(){
         console.log(receipt);
         contractInstance.methods.userBalance().call()
         .then(function(result){
-            console.log(result);
+            console.log("user has " + web3.utils.fromWei(result) + " ETH");
             $("#user_balance").text(result);
         }) 
     })
@@ -88,11 +85,35 @@ function withdraw(){
 function userGetBalance(){
     contractInstance.methods.userBalance().call()
     .then(function(result){
-        console.log(result);
-        $("#user_balance").text(result);
+        console.log("user has " + web3.utils.fromWei(result) + " ETH");
+        $("#user_balance").text(web3.utils.fromWei(result) + " ETH");
     }) 
-    .then(function(receipt){
-        console.log("test1");
-    })
 }
 
+
+function getContractBalance(){
+    contractInstance.methods.getContractBalance().call()
+    .then(function(result){
+        console.log("contract has " + web3.utils.fromWei(result) + " ETH");
+        $("#contract_balance").text(web3.utils.fromWei(result) + " ETH");
+    }) 
+}
+
+function withdrawContractBalance(){
+
+    contractInstance.methods.withdrawContractBalance().send()
+    .on("transactionHash", function(hash){ 
+        console.log(hash);
+    }) 
+    .on("confirmation", function(confirmationNr){
+        console.log(confirmationNr); 
+    })
+    .on("receipt", function(receipt){
+        console.log(receipt);
+        contractInstance.methods.getContractBalance().call()
+        .then(function(result){
+            console.log("contract has " + web3.utils.fromWei(result) + " ETH");
+            $("#contract_balance").text(result);
+        }) 
+    })
+}

@@ -1,10 +1,8 @@
 # coin-flip-dapp
 Ivan On Tech Ethereum Smart Contract Programming 201 Project
 
-TO DO:
+Phase 1: coin flip dapp with pseudo-randomness
+Phase 2: integrate oracle
 
-- add bet result and balance to front-end
-
-- check storage variables
-
-- add OnlyOwner withdraw function for contract balance
+Notes:
+-use Ganache CLI on port 8545

@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.7.0;
+pragma solidity 0.6.0;
 
-contract CoinFlip {
-    
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+
+contract CoinFlip is Ownable {
+
     event Result (uint result);
 
     struct Player {
@@ -15,14 +18,15 @@ contract CoinFlip {
     function playerBet(uint amount) public payable {
         require(msg.value == amount);
         Player storage c = players[msg.sender];
-        
         c.id = msg.sender;
-        uint result = random();
 
+        uint result = random();
         if (result == 1) {
             c.balance += amount;
         }
+
         emit Result(result);
+
     }
 
     // pseudo-random function returns a 1 or 0 (simulates 50% odds)
@@ -47,6 +51,12 @@ contract CoinFlip {
         msg.sender.transfer(amount);
         Player storage c = players[msg.sender];
         c.balance -= amount;
+    }
+
+    function withdrawContractBalance() public onlyOwner {
+        require(address(this).balance > 0);
+        uint amount = address(this).balance;
+        msg.sender.transfer(amount);
     }
 
 }

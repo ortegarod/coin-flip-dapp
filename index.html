@@ -12,13 +12,18 @@
 <body>
     <div class="placeholder">
     <img src="eth-coin.png" style="max-width:250px;"><br>
-    <label for="betAmount">Enter Ether Amount (in wei):</label><br>
-    <input type="number" id="betAmount" name="Amount"><br>
-    <button type="button" id="betButton">Bet!</button><br>     
-    Bet Result: <span id="bet_result"></span><br>
+    <label for="betAmount">Enter Ether Amount to Bet:</label><br>
+    <input type="number" id="betAmount" name="Amount"><br><br>
+    <button type="button" id="betButton"><h2>Bet!</h2></button><br><br>     
+    Last Result: <span id="bet_result"></span><br>
     My Balance: <span id="user_balance"></span><br>
     <button type="button" id="userGetBalance">Update Balance</button><br>
     <button type="button" id="userWithdrawBalance">Withdraw Balance</button><br>
+    <br>
+    Contract Balance: <span id="contract_balance"></span><br>
+    <button type="button" id="getContractBalance">Contract Balance</button><br>
+    <button type="button" id="withdrawContractBalance">Withdraw Contract Balance (owner only)</button><br>
+
     </div>
     <style>
         .placeholder {

@@ -44,7 +44,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -68,7 +69,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -101,7 +103,8 @@
       "name": "playerBet",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [],
@@ -114,7 +117,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -127,7 +131,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -140,7 +145,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -4575,27 +4581,7 @@
     "version": "0.6.0+commit.26b70077.Emscripten.clang"
   },
   "networks": {
-    "5777": {
-      "events": {
-        "0xa9bb0fa194e939eadb11be8d62dd4a16e0f5e89f37fb73fa7f0f8446f1abba61": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "result",
-              "type": "uint256"
-            }
-          ],
-          "name": "Result",
-          "type": "event"
-        }
-      },
-      "links": {},
-      "address": "0x6449C338ED10B383dD64D5A827037dCDa1144b17",
-      "transactionHash": "0x0c95016c990f414bff6e115afe48600d4bbfcd977129e4fa645a17aed72e74dd"
-    },
-    "1603937687910": {
+    "4": {
       "events": {
         "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
           "anonymous": false,
@@ -4631,12 +4617,13 @@
         }
       },
       "links": {},
-      "address": "0xF4e9eaF178E74f643AF6a2bDD397228B8e8b518a",
-      "transactionHash": "0x91798ebd4b4d79837e6b57eee41c3cef2c6e559e73fb5c146e085c296994e253"
+      "address": "0x32faA7a3c1eaEF2Ce8eb14Dbbf3A6920af394535",
+      "transactionHash": "0x9b1d47057061c8ddd219d8b90390e10920499520dc32cc4c85bab5fb73c00d01"
     }
   },
   "schemaVersion": "3.2.5",
-  "updatedAt": "2020-10-29T23:27:11.478Z",
+  "updatedAt": "2020-10-30T01:38:50.395Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {
       "owner()": {

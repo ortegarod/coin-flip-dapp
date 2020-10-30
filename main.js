@@ -1,6 +1,8 @@
 var web3 = new Web3(Web3.givenProvider);
 var contractInstance;
 
+
+
 $(document).ready(function() {
     window.ethereum.enable().then(function(accounts){
         // contractInstance = web3.eth.contract(abi).at("0x30c6e523183391E685Af5fBdE4F2340E5224720E");

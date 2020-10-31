@@ -2,9 +2,9 @@
 pragma solidity 0.6.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./provableAPI_0.5.sol";
 
-
-contract CoinFlip is Ownable {
+contract CoinFlip is Ownable, usingProvable {
 
     event Result (uint result);
 

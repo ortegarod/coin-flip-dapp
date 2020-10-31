@@ -5,9 +5,7 @@ var contractInstance;
 
 $(document).ready(function() {
     window.ethereum.enable().then(function(accounts){
-        // contractInstance = web3.eth.contract(abi).at("0x30c6e523183391E685Af5fBdE4F2340E5224720E");
-
-        contractInstance = new web3.eth.Contract(abi, "0x32faA7a3c1eaEF2Ce8eb14Dbbf3A6920af394535", {from: accounts[0]});
+        contractInstance = new web3.eth.Contract(abi, "0x529475dB52B0529e5E7B2736cA21906DD847e470", {from: accounts[0]});
         console.log(contractInstance);
     });
 
@@ -44,22 +42,29 @@ function bet(){
         .then(function(result){
             console.log("contract has " + web3.utils.fromWei(result) + " ETH");
             $("#contract_balance").text(web3.utils.fromWei(result) + " ETH");
-        }) 
-    })
+        })
+        
+        contractInstance.once('LogNewProvableQuery', {}, (function(error, event){
+            console.log(event);
+        }))
 
-    contractInstance.once('Result', {}, (function(error, event){
-        console.log(event);
-        // console.log(event.returnValues['result']);
-        // $("#bet_result").text(event.returnValues['result']);
-
-        if (event.returnValues['result'] == 1) {
-            $("#bet_result").text("WINNER");
-            console.log("user won")
-        } else
-        $("#bet_result").text("LOSER") &&
-        console.log("user lost")
+        contractInstance.once('generatedRandomNumber', {}, (function(error, event){
+            console.log(event);
+            $("#random_number").text(event.returnValues['randomNumber']);
+        }))
 
     })
+
+        contractInstance.once('Result', {}, (function(error, event){
+            console.log(event);
+            if (event.returnValues['result'] == 1) {
+                $("#bet_result").text("WINNER");
+                console.log("user won")
+            } else
+            $("#bet_result").text("LOSER") &&
+            console.log("user lost")
+
+        })
 
     )}
 

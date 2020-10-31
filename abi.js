@@ -1,29 +1,66 @@
 var abi = [
   {
-    "anonymous": false,
-    "inputs": [
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "previousOwner",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newOwner",
+        "name": "",
         "type": "address"
       }
     ],
-    "name": "OwnershipTransferred",
-    "type": "event"
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "latestNumber",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "players",
+    "outputs": [
+      {
+        "name": "balance",
+        "type": "uint256"
+      },
+      {
+        "name": "id",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
     "anonymous": false,
     "inputs": [
       {
         "indexed": false,
-        "internalType": "uint256",
         "name": "result",
         "type": "uint256"
       }
@@ -32,132 +69,150 @@ var abi = [
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
+    "anonymous": false,
     "inputs": [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
+        "indexed": false,
+        "name": "description",
+        "type": "string"
       }
     ],
-    "name": "players",
-    "outputs": [
+    "name": "LogNewProvableQuery",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
       {
-        "internalType": "uint256",
-        "name": "balance",
+        "indexed": false,
+        "name": "randomNumber",
         "type": "uint256"
-      },
-      {
-        "internalType": "address payable",
-        "name": "id",
-        "type": "address"
       }
     ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "name": "generatedRandomNumber",
+    "type": "event"
   },
   {
-    "inputs": [],
-    "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
+    "constant": false,
     "inputs": [
       {
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
       }
     ],
     "name": "playerBet",
     "outputs": [],
+    "payable": true,
     "stateMutability": "payable",
-    "type": "function",
-    "payable": true
+    "type": "function"
   },
   {
+    "constant": true,
     "inputs": [],
     "name": "random",
     "outputs": [
       {
-        "internalType": "uint256",
         "name": "",
         "type": "uint256"
       }
     ],
+    "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
+    "constant": true,
     "inputs": [],
     "name": "getContractBalance",
     "outputs": [
       {
-        "internalType": "uint256",
         "name": "",
         "type": "uint256"
       }
     ],
+    "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
+    "constant": true,
     "inputs": [],
     "name": "userBalance",
     "outputs": [
       {
-        "internalType": "uint256",
         "name": "balance",
         "type": "uint256"
       }
     ],
+    "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
+    "constant": false,
     "inputs": [],
     "name": "withdrawPlayerBalance",
     "outputs": [],
+    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
+    "constant": false,
     "inputs": [],
     "name": "withdrawContractBalance",
     "outputs": [],
+    "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_myid",
+        "type": "bytes32"
+      },
+      {
+        "name": "_result",
+        "type": "string"
+      }
+    ],
+    "name": "__callback",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_queryId",
+        "type": "bytes32"
+      },
+      {
+        "name": "_result",
+        "type": "string"
+      },
+      {
+        "name": "_proof",
+        "type": "bytes"
+      }
+    ],
+    "name": "__callback",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "update",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
     "type": "function"
   }
 ]

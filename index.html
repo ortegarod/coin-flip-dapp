@@ -11,24 +11,60 @@
 </head>
 <body>
     <div class="placeholder">
-    <img src="eth-coin.png" style="max-width:250px;"><br>
-    <label for="betAmount">Enter Ether Amount to Bet:</label><br>
+
+    <img src="eth-coin.png" style="max-width:250px;"><br><br>
+
+    <h4>
+    <div class="header">
+    Ethereum Account Address: <span id="ethereum_account"></span><br>
+    Ether Balance: <span id="ethereum_balance"></span><br>
+    Ether Amount Won: <span id="user_balance"></span><p>
+    </div>
+    </h4>
+
+    <h2>
+    <div class="result" id="result"><span id="bet_result"></span><p></p>
+    </div>
+    </h2>
+    
+    <h5>
+    <div id="betUI">
+    <label for="betAmount">Enter Ether Amount to Bet:</label><br><p></p>
     <input type="number" id="betAmount" name="Amount"><br><br>
-    <button type="button" id="betButton"><h2>Bet!</h2></button><br><br>     
-    Last Result: <span id="bet_result"></span><br>
-    My Balance: <span id="user_balance"></span><br>
-    <button type="button" id="userGetBalance">Update Balance</button><br>
-    <button type="button" id="userWithdrawBalance">Withdraw Balance</button><br>
-    <br>
+    <button type="button" id="betButton"><h2>Bet!</h2></button><p>
+    <button type="button" id="userWithdrawBalance"><h2>Withdraw</h2></button><br>
+    </div>
+    </h5>
+
+    <h3>
+    <div class="wait" id="wait">SENDING TX...</div>
+
+    <div class="wait2" id="wait2">CONTACTING ORACLE SERVICE...</div>
+    </h3>
+
+    <div class="footer">
     Contract Balance: <span id="contract_balance"></span><br>
-    <button type="button" id="getContractBalance">Contract Balance</button><br>
+    Contract Address <a href="https://rinkeby.etherscan.io/address/0x9a9EDc135a41b131AE5031841BB5D9B4a853977e">(Rinkeby Testnet):<br></a> <span id="contract_address"></span><br><br>
     <button type="button" id="withdrawContractBalance">Withdraw Contract Balance (contract owner)</button><br>
-    Random Number: <span id="random_number"></span><br>
+    </div>
 
     </div>
+
     <style>
         .placeholder {
             text-align:center;
+        }
+        .wait {
+            display:none;
+        }
+        .wait2 {
+            display:none;
+        }
+        .result {
+            display:none;
+        }
+        .footer {
+            font-size: 12px;
         }
     </style>
 </body>

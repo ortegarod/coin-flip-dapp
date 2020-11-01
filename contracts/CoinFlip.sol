@@ -6,46 +6,23 @@ import "./provableAPI_0.5.sol";
 
 contract CoinFlip is Ownable, usingProvable {
 
-    event Result (uint result);
     event LogNewProvableQuery(string description);
     event generatedRandomNumber(uint256 randomNumber);
+    event oracleId(bytes32 queryId);
+    event wallet(address playerWallet);
+    event betAmount(uint bet);
 
     uint256 constant NUM_RANDOM_BYTES_REQUESTED = 1;
-    uint256 public latestNumber;
 
     struct Player {
         uint balance;
-        address payable id;
+        uint latestBet;
+        bool waiting;
     }
     
     mapping(address => Player) public players;
+    mapping(bytes32 => address) public queries;
 
-    constructor()
-        public
-    {
-        update();
-    }
-
-    function playerBet(uint amount) public payable {
-        require(msg.value == amount);
-        update();
-        Player storage c = players[msg.sender];
-        c.id = msg.sender;
-
-        uint result = random();
-        if (result == 1) {
-            c.balance += amount;
-        }
-
-        emit Result(result);
-
-    }
-
-    // pseudo-random function returns a 1 or 0 (simulates 50% odds)
-    function random() public view returns (uint) {
-        return block.timestamp % 2;
-    }
-    
     // returns this contract's current balance
     function getContractBalance() public view returns (uint) {
         return address(this).balance;
@@ -55,7 +32,7 @@ contract CoinFlip is Ownable, usingProvable {
     function userBalance() public view returns (uint balance) {
         return players[msg.sender].balance;
     }
-    
+
     // withdraw Player winnings
     function withdrawPlayerBalance() public {
         require(players[msg.sender].balance > 0);
@@ -71,25 +48,51 @@ contract CoinFlip is Ownable, usingProvable {
         msg.sender.transfer(amount);
     }
 
-    function __callback(bytes32 _queryId, string memory _result, bytes memory _proof) public {
+    function __callback(bytes32 _queryId, string memory _result) public {
         require(msg.sender == provable_cbAddress());
         
-        uint256 randomNumber = uint256(keccak256(abi.encodePacked(_result))) % 100;
-        latestNumber = randomNumber;
+        uint256 randomNumber = uint256(keccak256(abi.encodePacked(_result))) % 2;
+
+        address playerWallet = queries[_queryId];
+        Player storage c = players[playerWallet];
+        c.waiting = false;
+        
+        uint bet = c.latestBet;
+        if (randomNumber == 1) {
+            c.balance += bet;
+        }
+
+
+        emit wallet(playerWallet);
+        emit betAmount(bet);
         emit generatedRandomNumber(randomNumber);
     }
 
-    function update()
+    function playerBet(uint amount)
         payable
         public
     {
+        require(msg.value == amount);
+        require(players[msg.sender].waiting == false);
+        
+
+
         uint256 QUERY_EXECUTION_DELAY = 0; // NOTE: The datasource currently does not support delays > 0!
         uint256 GAS_FOR_CALLBACK = 200000;
-        provable_newRandomDSQuery(
+        
+        bytes32 queryId = provable_newRandomDSQuery(
             QUERY_EXECUTION_DELAY,
             NUM_RANDOM_BYTES_REQUESTED,
             GAS_FOR_CALLBACK
         );
+        
+        queries[queryId] = msg.sender;
+
+        Player storage c = players[msg.sender];
+            c.latestBet = amount;
+            c.waiting = true;
+
+        emit oracleId(queryId);
         emit LogNewProvableQuery("Provable query was sent, standing by for the answer...");
     }
 

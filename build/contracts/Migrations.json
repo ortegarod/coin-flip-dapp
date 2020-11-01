@@ -867,12 +867,12 @@
     "4": {
       "events": {},
       "links": {},
-      "address": "0x4a5620a4F377F78E6cfF9955edB40C8FfE40616d",
-      "transactionHash": "0x8475e87dbe8b03d0754230c5e2cb091cdbdc9d4a672ad106371c7d4cdf4b46e6"
+      "address": "0x58964Ac7D6b95EE5aFC1b0E93C4F206b55813F35",
+      "transactionHash": "0x15143677316489ee202ce2d391b836ac2dcb68bb6c30f6db2b4e4dfb2575e826"
     }
   },
   "schemaVersion": "3.2.5",
-  "updatedAt": "2020-10-31T22:23:52.032Z",
+  "updatedAt": "2020-11-01T04:38:27.965Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

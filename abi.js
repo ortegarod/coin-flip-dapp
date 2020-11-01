@@ -1,8 +1,13 @@
 var abi = [
   {
     "constant": true,
-    "inputs": [],
-    "name": "owner",
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "queries",
     "outputs": [
       {
         "name": "",
@@ -16,11 +21,11 @@ var abi = [
   {
     "constant": true,
     "inputs": [],
-    "name": "latestNumber",
+    "name": "owner",
     "outputs": [
       {
         "name": "",
-        "type": "uint256"
+        "type": "address"
       }
     ],
     "payable": false,
@@ -42,31 +47,17 @@ var abi = [
         "type": "uint256"
       },
       {
-        "name": "id",
-        "type": "address"
+        "name": "latestBet",
+        "type": "uint256"
+      },
+      {
+        "name": "waiting",
+        "type": "bool"
       }
     ],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
-  },
-  {
-    "inputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "result",
-        "type": "uint256"
-      }
-    ],
-    "name": "Result",
-    "type": "event"
   },
   {
     "anonymous": false,
@@ -93,32 +84,40 @@ var abi = [
     "type": "event"
   },
   {
-    "constant": false,
+    "anonymous": false,
     "inputs": [
       {
-        "name": "amount",
-        "type": "uint256"
+        "indexed": false,
+        "name": "queryId",
+        "type": "bytes32"
       }
     ],
-    "name": "playerBet",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
+    "name": "oracleId",
+    "type": "event"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "random",
-    "outputs": [
+    "anonymous": false,
+    "inputs": [
       {
-        "name": "",
+        "indexed": false,
+        "name": "playerWallet",
+        "type": "address"
+      }
+    ],
+    "name": "wallet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "bet",
         "type": "uint256"
       }
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
+    "name": "betAmount",
+    "type": "event"
   },
   {
     "constant": true,
@@ -170,7 +169,7 @@ var abi = [
     "constant": false,
     "inputs": [
       {
-        "name": "_myid",
+        "name": "_queryId",
         "type": "bytes32"
       },
       {
@@ -188,7 +187,7 @@ var abi = [
     "constant": false,
     "inputs": [
       {
-        "name": "_queryId",
+        "name": "_myid",
         "type": "bytes32"
       },
       {
@@ -208,8 +207,13 @@ var abi = [
   },
   {
     "constant": false,
-    "inputs": [],
-    "name": "update",
+    "inputs": [
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "playerBet",
     "outputs": [],
     "payable": true,
     "stateMutability": "payable",

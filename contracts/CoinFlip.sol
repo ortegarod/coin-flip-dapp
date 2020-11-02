@@ -11,6 +11,9 @@ contract CoinFlip is Ownable, usingProvable {
     event oracleId(bytes32 queryId);
     event wallet(address playerWallet);
     event betAmount(uint bet);
+    event wins(uint wins);
+    event losses(uint losses);
+
 
     uint256 constant NUM_RANDOM_BYTES_REQUESTED = 1;
 
@@ -18,10 +21,26 @@ contract CoinFlip is Ownable, usingProvable {
         uint balance;
         uint latestBet;
         bool waiting;
+        uint wins;
+        uint losses;
+        uint betChoice;
+        uint latestNumber;
     }
     
     mapping(address => Player) public players;
     mapping(bytes32 => address) public queries;
+
+    function oracleResult(address a) public view returns (uint) {
+        return players[a].latestNumber;
+    }
+
+    function getWins(address a) public view returns (uint) {
+        return players[a].wins;
+    }
+
+    function getLosses(address a) public view returns (uint) {
+        return players[a].losses;
+    }
 
     // returns this contract's current balance
     function getContractBalance() public view returns (uint) {
@@ -40,6 +59,8 @@ contract CoinFlip is Ownable, usingProvable {
         msg.sender.transfer(amount);
         Player storage c = players[msg.sender];
         c.balance -= amount;
+        c.wins = 0;
+        c.losses = 0;
     }
 
     function withdrawContractBalance() public onlyOwner {
@@ -56,19 +77,25 @@ contract CoinFlip is Ownable, usingProvable {
         address playerWallet = queries[_queryId];
         Player storage c = players[playerWallet];
         c.waiting = false;
-        
+        c.latestNumber = randomNumber;
         uint bet = c.latestBet;
-        if (randomNumber == 1) {
+        if (randomNumber == c.betChoice) {
             c.balance += bet;
+            c.wins += 1;
+        } else {
+            c.losses += 1;
         }
 
 
         emit wallet(playerWallet);
         emit betAmount(bet);
         emit generatedRandomNumber(randomNumber);
+        emit wins(c.wins);
+        emit losses(c.losses);
+
     }
 
-    function playerBet(uint amount)
+    function playerBet(uint amount, uint betChoice)
         payable
         public
     {
@@ -91,6 +118,7 @@ contract CoinFlip is Ownable, usingProvable {
         Player storage c = players[msg.sender];
             c.latestBet = amount;
             c.waiting = true;
+            c.betChoice = betChoice;
 
         emit oracleId(queryId);
         emit LogNewProvableQuery("Provable query was sent, standing by for the answer...");

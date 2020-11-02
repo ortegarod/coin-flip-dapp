@@ -11,41 +11,53 @@
 </head>
 <body>
     <div class="placeholder">
+    <h1>Coin Flip Dapp</h1>
 
     <img src="eth-coin.png" style="max-width:250px;"><br><br>
 
-    <h4>
     <div class="header">
-    Ethereum Account Address: <span id="ethereum_account"></span><br>
-    Ether Balance: <span id="ethereum_balance"></span><br>
-    Ether Amount Won: <span id="user_balance"></span><p>
+    <hr>
+    <b>Ethereum Account Address: </b><span id="ethereum_account"></span><br>
+    <b>Ether Balance: </b><span id="ethereum_balance"></span><br>
+    <hr>
+
+    <h2>50/50 ODDS</h2>
+
+    <b>Unclaimed Ether Balance: </b></b><span id="user_balance"></span><br>
+    <b>Wins: </b><span id="wins"></span><br>
+    <b>Losses: </b><span id="losses"></span><br>
     </div>
-    </h4>
 
     <h2>
     <div class="result" id="result"><span id="bet_result"></span><p></p>
+    <div class="oracle_result" id="oracle_result"><span id="oracle_result"></span><p></p>
     </div>
     </h2>
     
-    <h5>
-    <div id="betUI">
-    <label for="betAmount">Enter Ether Amount to Bet:</label><br><p></p>
-    <input type="number" id="betAmount" name="Amount"><br><br>
-    <button type="button" id="betButton"><h2>Bet!</h2></button><p>
-    <button type="button" id="userWithdrawBalance"><h2>Withdraw</h2></button><br>
-    </div>
-    </h5>
-
     <h3>
-    <div class="wait" id="wait">SENDING TX...</div>
-
-    <div class="wait2" id="wait2">CONTACTING ORACLE SERVICE...</div>
+    <div id="betUI">
+    <label for="betAmount">Enter Ether Amount to Bet:</label><p></p>
+    <input type="number" id="betAmount" name="Amount"><br><br>
+    <button type="button" class="betButton" value="1" id="betButton"><h2>HEADS</h2></button>
+    <button type="button" class="betButton2" value="0" id="betButton2"><h2>TAILS</h2></button><p>
+    <button type="button" class="userWithdrawBalance" id="userWithdrawBalance"><h2>WITHDRAW BALANCE</h2></button><br>
+    </div>
     </h3>
+
+    <h2>
+    <div class="wait" id="wait">SENDING BET...</div>
+
+    <div class="wait2" id="wait2">FLIPPING YOUR COIN...<p>GRAB A SNACK, THIS COULD TAKE A MINUTE...</div>
+    </h2>
 
     <div class="footer">
     Contract Balance: <span id="contract_balance"></span><br>
-    Contract Address <a href="https://rinkeby.etherscan.io/address/0x9a9EDc135a41b131AE5031841BB5D9B4a853977e">(Rinkeby Testnet):<br></a> <span id="contract_address"></span><br><br>
-    <button type="button" id="withdrawContractBalance">Withdraw Contract Balance (contract owner)</button><br>
+    Contract Address <a href="https://rinkeby.etherscan.io/address/0xC7D411CC5d9f463beF26b3E5Cfd15d6b0B3a4288">(Rinkeby Testnet):</a> <span id="contract_address"></span><p></p>
+    Random Number Generation (RNG) provided by <a href="https://provable.xyz/">Provable API</a><p></p>
+    </div>
+
+    <div class="withdraw" id="withdraw">
+    <button type="button" id="withdrawContractBalance">Withdraw Contract Balance (contract owner)</button>
     </div>
 
     </div>
@@ -65,6 +77,21 @@
         }
         .footer {
             font-size: 12px;
+        }
+        .withdraw {
+            font-size: 12px;
+        }
+        .betButton {
+            height: 100px;
+            width: 150px;
+        }        
+        .betButton2 {
+            height: 100px;
+            width: 150px;
+        }
+        .userWithdrawBalance {
+            height: 100px;
+            width: 300px;
         }
     </style>
 </body>

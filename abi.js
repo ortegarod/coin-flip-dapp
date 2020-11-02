@@ -53,6 +53,22 @@ var abi = [
       {
         "name": "waiting",
         "type": "bool"
+      },
+      {
+        "name": "wins",
+        "type": "uint256"
+      },
+      {
+        "name": "losses",
+        "type": "uint256"
+      },
+      {
+        "name": "betChoice",
+        "type": "uint256"
+      },
+      {
+        "name": "latestNumber",
+        "type": "uint256"
       }
     ],
     "payable": false,
@@ -118,6 +134,87 @@ var abi = [
     ],
     "name": "betAmount",
     "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "wins",
+        "type": "uint256"
+      }
+    ],
+    "name": "wins",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "losses",
+        "type": "uint256"
+      }
+    ],
+    "name": "losses",
+    "type": "event"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "a",
+        "type": "address"
+      }
+    ],
+    "name": "oracleResult",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "a",
+        "type": "address"
+      }
+    ],
+    "name": "getWins",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "a",
+        "type": "address"
+      }
+    ],
+    "name": "getLosses",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "constant": true,
@@ -210,6 +307,10 @@ var abi = [
     "inputs": [
       {
         "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "betChoice",
         "type": "uint256"
       }
     ],

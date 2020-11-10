@@ -22,7 +22,7 @@
 
 ### Built With
 
-* [](Truffle)
+* (Truffle)
 * [](Ganache-CLI)
 * [](Web3.js)
 * [](jQuery)
@@ -44,7 +44,7 @@ npm install npm@latest -g
 
 1. Clone the repo
 ```sh
-git clone https://github.com/ortegarod/coin-flip-dapp.git
+gh repo clone ortegarod/coin-flip-dapp
 ```
 2. Install NPM packages
 ```sh

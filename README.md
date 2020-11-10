@@ -15,11 +15,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-  <p align="center">
-    50/50 ODDS BETTING DAPP
-    <br />
  Ethereum dapp with web application user-interface and smart contract deployed on Rinkeby testnet.
+ <p>
+ <img src="/example.PNG" alt="Dapp Example Screenshot">
 
 ### Built With
 

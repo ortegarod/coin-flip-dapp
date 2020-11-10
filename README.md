@@ -19,13 +19,14 @@
   <p align="center">
     50/50 ODDS BETTING DAPP
     <br />
+ Ethereum dapp with web application user-interface and smart contract deployed on Rinkeby testnet.
 
 ### Built With
 
-* (Truffle)
-* [](Ganache-CLI)
-* [](Web3.js)
-* [](jQuery)
+* Truffle
+* Ganache-CLI
+* Web3.js
+* jQuery
 
 
 <!-- GETTING STARTED -->
